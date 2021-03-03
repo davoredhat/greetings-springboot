@@ -23,3 +23,4 @@ The app can be run locally using the following Maven goal:
 Verify that the application is running, using curl or your browser, verify your application:
 
     $ curl http://localhost:8080
+    {"content":"Greetings!"}
