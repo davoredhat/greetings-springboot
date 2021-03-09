@@ -14,7 +14,9 @@
   <!-- Use OpenJDK 8 and OpenJDK 11-based images. OracleJDK-based images are not supported. -->
   <properties>
     <!-- <fabric8.generator.from>registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:latest</fabric8.generator.from> -->
-    <fabric8.generator.from>registry.access.redhat.com/ubi8/openjdk11:latest</fabric8.generator.from>
+    <!-- <fabric8.generator.from>registry.access.redhat.com/ubi8/openjdk11:latest</fabric8.generator.from> -->
+    <spring-boot.version>2.1.15.RELEASE</spring-boot.version>
+    <spring-boot-maven-plugin.version>2.1.15.RELEASE</spring-boot-maven-plugin.version>
   </properties>
 
   <!-- Import dependencies from the Spring Boot BOM. -->
@@ -44,14 +46,24 @@
         <artifactId>spring-boot-starter-web</artifactId>
       </dependency>
   </dependencies>
-
+         
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.1.15.RELEASE</version>
-      </plugin>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>${spring-boot-maven-plugin.version}</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+              </executions>
+            <configuration>
+                <redeploy>true</redeploy>
+            </configuration>
+        </plugin>
     </plugins>
   </build>
 
